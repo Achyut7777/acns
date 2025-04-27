@@ -6,9 +6,65 @@ import sys
 # Must match the KEY_LEN in xor.py
 KEY_LEN = 1094
 
-# Create sample basic.red and advanced.red warrior files
-basic_warrior = b"; Basic Warrior - Imp strategy\n        org imp\nimp     mov.i #0, 1\n        end\n"
-advanced_warrior = b"; Advanced Warrior - Scanner/Bomber hybrid\n        org start\nstep    equ 3044\ngap     equ 15\nfirst   equ (bomb-5334)\nstart   add.ab #step, scan\nscan    cmp.i  first, first+gap\n        slt.ab #100, scan\n        jmp    start\n        mov.i  bomb, @scan\n        add.ab #1, scan\n        jmp    -1\nbomb    dat    #0, #0\n"
+# Create properly formatted Redcode warriors based on documentation
+basic_warrior = b""";redcode-94
+;name     SimpleImp
+;author   RohanSamuel
+;strategy Basic replicator with occasional bombing - similar to Level3
+
+        org     start
+
+start   spl     0             ; spawn a new process
+        mov     @start, ptr   ; replicate code to ptr
+        add     #5, ptr       ; advance replication pointer
+
+        ; only bomb every 3rd iteration
+        add     #1, counter   ; increment counter
+        mov     bomb, @bptr   ; drop a bomb
+        add     #25, bptr     ; advance bombing pointer
+
+        jmp     start         ; loop forever
+
+ptr      dat    #0           ; replication pointer
+bptr     dat    #100         ; bombing pointer
+counter  dat    #0           ; loop counter
+bomb     dat    #0, #0       ; DAT bomb
+
+        end     start
+"""
+
+advanced_warrior = b""";redcode-94
+;name     ScannerBomber
+;author   RohanSamuel
+;strategy Scanner that searches for enemy code and bombs it
+;strategy Based on successful warrior patterns from the documentation
+
+        org     start
+
+step    equ     3044          ; step size (large prime)
+gap     equ     12            ; scan distance
+offset  equ     1             ; distance to place bomb
+
+start   add.ab  #step, scan   ; increment scan pointer
+scan    cmp.i   }0, }gap      ; compare two locations
+        slt.ab  #100, scan    ; skip if we're scanning ourselves
+        jmp     bomber        ; jump to bombing routine if difference found
+        jmp     start         ; continue scanning
+
+bomber  mov.i   bomb, @scan   ; drop a bomb at the detected location
+        add.ab  #offset, scan ; adjust bombing location
+        mov.i   bomb, *scan   ; drop another bomb nearby
+        sub.ab  #offset, scan ; restore scan pointer
+        jmp     start         ; continue scanning
+
+bomb    dat     #0, #0        ; the bomb
+
+for 10
+        dat     0, 0          ; some padding to make it harder to hit
+rof
+
+        end     start
+"""
 
 # Generate keys using the same algorithm as xor.py
 def generate_key(hex_key):
@@ -17,7 +73,8 @@ def generate_key(hex_key):
     except ValueError:
         sys.exit("Invalid hex key")
     
-    random.seed(42)  # Same seed as in xor.py
+    # Set the same seed as in xor.py for consistent random numbers
+    random.seed(42)
     key = [0] * KEY_LEN
     for c in key_bytes:
         for _ in range(c):
