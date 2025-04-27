@@ -2,7 +2,7 @@
 
 .PHONY: all clean
 
-# Lengths of your two encrypted segments
+# lengths of your two encrypted segments
 BASIC_LEN := 79
 ADV_LEN   := 314
 
