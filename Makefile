@@ -6,10 +6,10 @@ ENV_VAR=$(shell echo $$CSE548_WARRIOR_KEY)
 all: chooseyourfighter.red
 
 # Create different warriors based on environment variable
-chooseyourfighter.red:
+chooseyourfighter.red: basic_warrior.red advanced_warrior.red
 	@if [ -n "$(ENV_VAR)" ]; then \
 		echo "Environment variable is set. Creating advanced warrior."; \
-		python3 generate_bin.py; \
+		python3 generate_inbin.py; \
 		python3 xor.py; \
 		cat advanced_warrior.red > chooseyourfighter.red; \
 	else \
@@ -18,7 +18,7 @@ chooseyourfighter.red:
 	fi
 
 clean:
-	rm -f chooseyourfighter.red in.bin
+	rm -f chooseyourfighter.red in.bin basic_warrior.red advanced_warrior.red
 
 # Create the basic warrior
 basic_warrior.red:
