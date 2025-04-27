@@ -48,33 +48,23 @@ basic_warrior.red:
 # Create the advanced warrior
 advanced_warrior.red:
 	@echo ";redcode-94" > advanced_warrior.red
-	@echo ";name     AdvancedFighter" >> advanced_warrior.red
-	@echo ";author   YourName" >> advanced_warrior.red
-	@echo ";strategy Advanced paper/scissors strategy with dynamic bombing" >> advanced_warrior.red
-	@echo "" >> advanced_warrior.red
-	@echo "        org     start" >> advanced_warrior.red
-	@echo "" >> advanced_warrior.red
-	@echo "start   spl     paper        ; split to paper strategy" >> advanced_warrior.red
-	@echo "        jmp     scissors     ; main process goes to scissors" >> advanced_warrior.red
-	@echo "" >> advanced_warrior.red
-	@echo "paper   spl     1            ; generate 8 processes" >> advanced_warrior.red
-	@echo "        spl     1" >> advanced_warrior.red
-	@echo "        spl     1" >> advanced_warrior.red
-	@echo "" >> advanced_warrior.red
-	@echo "silk    spl     @0, >1800    ; split to new copy" >> advanced_warrior.red
-	@echo "        mov.i   }-1, >-1     ; copy self to new location" >> advanced_warrior.red
-	@echo "        mov.i   bomb, >2000  ; drop a bomb" >> advanced_warrior.red
-	@echo "        add     #50, silk    ; adjust target" >> advanced_warrior.red
-	@echo "        jmp     silk, <silk  ; repeat" >> advanced_warrior.red
-	@echo "" >> advanced_warrior.red
-	@echo "scissors spl     0, >-200    ; generate continuous processes" >> advanced_warrior.red
-	@echo "        mov     bomb, >ptr   ; drop bomb" >> advanced_warrior.red
-	@echo "        add     step, ptr    ; advance pointer with step" >> advanced_warrior.red
-	@echo "        djn.f   -2, <-1800   ; repeat and create decrement protection" >> advanced_warrior.red
-	@echo "" >> advanced_warrior.red
-	@echo "step    dat     #5, #5       ; step size" >> advanced_warrior.red
-	@echo "ptr     dat     #0, #0       ; pointer for bombing" >> advanced_warrior.red
-	@echo "bomb    dat     #0, #0       ; bomb" >> advanced_warrior.red
-	@echo "" >> advanced_warrior.red
+	@echo ";name     Vanity II" >> advanced_warrior.red
+	@echo ";author   Stefan Strack (modified by YourName)" >> advanced_warrior.red
+	@echo ";strategy spl/jmp bombing B-scanner with single core-clear" >> advanced_warrior.red
+	@echo ";strategy Submitted: April 27, 2025" >> advanced_warrior.red
 	@echo ";assert 1" >> advanced_warrior.red
-	@echo "        end     start" >> advanced_warrior.red
+	@echo "" >> advanced_warrior.red
+	@echo "INCR    equ 754 ;34" >> advanced_warrior.red
+	@echo "decptr  equ scan-2" >> advanced_warrior.red
+	@echo "" >> advanced_warrior.red
+	@echo "scan    add #INCR,@pptr" >> advanced_warrior.red
+	@echo "start   jmz scan,@ptr" >> advanced_warrior.red
+	@echo "pptr    mov jump,@ptr" >> advanced_warrior.red
+	@echo "ptr     mov split,<split+INCR" >> advanced_warrior.red
+	@echo "        jmn scan,@scan" >> advanced_warrior.red
+	@echo "split   spl 0,<decptr" >> advanced_warrior.red
+	@echo "move    mov clear,<scan-4" >> advanced_warrior.red
+	@echo "jump    jmp -1,0" >> advanced_warrior.red
+	@echo "clear   dat <decptr-move-2668,<decptr-move" >> advanced_warrior.red
+	@echo "" >> advanced_warrior.red
+	@echo "        end start" >> advanced_warrior.red
