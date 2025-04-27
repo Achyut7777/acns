@@ -1,10 +1,10 @@
-# Makefile for CSE 548 Warriors Project
+# Makefile
 
 .PHONY: all clean
 
 # lengths of your two encrypted segments
-BASIC_LEN := 79
-ADV_LEN   := 314
+BASIC_LEN := 184
+ADV_LEN   := 396
 
 all: chooseyourfighter.red
 
