@@ -19,6 +19,7 @@ def main():
         sys.exit("Invalid hex key on stdin")
 
     # 2) Expand into a pseudo-random key schedule
+    # Set fixed seed for consistent random numbers
     random.seed(42)
     key = [0] * KEY_LEN
     for c in key_bytes:
