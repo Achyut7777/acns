@@ -1,7 +1,7 @@
 # Makefile for CSE548 Warrior Assignment
 
-# Get the environment variable (replace STUDENT_ENV with your assigned variable)
-ENV_VAR=$(shell echo $$STUDENT_ENV)
+# Get your environment variable
+ENV_VAR=$(shell echo $$CSE548_WARRIOR_KEY)
 
 all: chooseyourfighter.red
 
