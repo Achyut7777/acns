@@ -39,8 +39,8 @@ def xor_encrypt(data, key):
 basic_hex_key = hashlib.sha256(hashlib.md5(b"").hexdigest().encode()).hexdigest()
 basic_key = generate_key(basic_hex_key)
 
-# Example env var for advanced
-env_var = "QWERTYUIO=testvalue"  # Example 9-char env var
+# Use your actual environment variable for advanced
+env_var = "HQLPEFRWP=1"  # Replace with your actual env var
 adv_hex_key = hashlib.sha256(hashlib.md5(env_var.encode()).hexdigest().encode()).hexdigest()
 adv_key = generate_key(adv_hex_key)
 
