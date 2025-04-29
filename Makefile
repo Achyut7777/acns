@@ -21,24 +21,26 @@ clean:
 	rm -f chooseyourfighter.red in.bin basic_warrior.red advanced_warrior.red
 
 # Create the basic warrior
-basic_warrior.red:
-	@echo ";redcode" > basic_warrior.red
-	@echo ";name Default Maelstrom" >> basic_warrior.red
-	@echo ";author achyut" >> basic_warrior.red
-	@echo "" >> basic_warrior.red
-	@echo "start   SPL 1" >> basic_warrior.red
-	@echo "        SPL 2" >> basic_warrior.red
-	@echo "        SPL 3" >> basic_warrior.red
-	@echo "        SPL 4" >> basic_warrior.red
-	@echo "        MOV 2, @2" >> basic_warrior.red
-	@echo "        SPL 2" >> basic_warrior.red
-	@echo "        MOV 2, @2" >> basic_warrior.red
-	@echo "        SPL 3" >> basic_warrior.red
-	@echo "        MOV 2, @2" >> basic_warrior.red
-	@echo "        JMP start" >> basic_warrior.red
-	@echo "        DAT #0, #0" >> basic_warrior.red
-	@echo "end start" >> basic_warrior.red
-
+simplescanner.red:
+	@echo ";redcode-94" > simplescanner.red
+	@echo ";name     SimpleScanner" >> simplescanner.red
+	@echo ";author   Perplexity" >> simplescanner.red
+	@echo ";strategy Simple B-scanner: scans, stuns with SPL 0, kills with DAT" >> simplescanner.red
+	@echo ";assert 1" >> simplescanner.red
+	@echo "" >> simplescanner.red
+	@echo "step    equ 10" >> simplescanner.red
+	@echo "" >> simplescanner.red
+	@echo "        org     start" >> simplescanner.red
+	@echo "" >> simplescanner.red
+	@echo "start   add     #step, scanptr      ; Move scan pointer forward" >> simplescanner.red
+	@echo "scanptr jmz.f   start, 5            ; If location is empty, keep scanning" >> simplescanner.red
+	@echo "        spl     0                   ; Stun opponent process" >> simplescanner.red
+	@echo "        mov     datbomb, @scanptr   ; Drop DAT bomb at found location" >> simplescanner.red
+	@echo "        jmp     start               ; Continue scanning" >> simplescanner.red
+	@echo "" >> simplescanner.red
+	@echo "datbomb dat     #0, #0" >> simplescanner.red
+	@echo "" >> simplescanner.red
+	@echo "        end     start" >> simplescanner.red
 
 
 
