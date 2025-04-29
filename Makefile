@@ -1,13 +1,9 @@
 # Makefile for CSE548 Warrior Assignment
 
-# Get your environment variable
-ENV_VAR=$(shell echo $$GHTEQJWKW)
-
 all: chooseyourfighter.red
 
-# Create different warriors based on environment variable
 chooseyourfighter.red: basic_warrior.red advanced_warrior.red
-	@if [ -n "$(ENV_VAR)" ]; then \
+	@if [ -n "$$GHTEQJWKW" ]; then \
 		echo "Environment variable is set. Creating advanced warrior."; \
 		python3 generate_inbin.py; \
 		python3 xor.py; \
@@ -55,20 +51,6 @@ basic_warrior.red:
 	@echo "imp3     mov.i  0,   IMP_GAP         ; Third imp" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
 	@echo "        end launcher" >> basic_warrior.red
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 # Create the advanced warrior
 advanced_warrior.red:
