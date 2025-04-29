@@ -23,32 +23,32 @@ clean:
 # Create the basic warrior
 basic_warrior.red:
 	@echo ";redcode-94" > basic_warrior.red
-	@echo ";name     PaperCutter" >> basic_warrior.red
-	@echo ";author   Perplexity AI" >> basic_warrior.red
-	@echo ";strategy Scanner with SPL bombs, then core-clear (beats replicators)" >> basic_warrior.red
+	@echo ";name     B-ScAn Live" >> basic_warrior.red
+	@echo ";author   Stefan Strack" >> basic_warrior.red
+	@echo ";strategy B-scanner with live bomb" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
 	@echo "        org     scan" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "step    equ     13" >> basic_warrior.red
-	@echo "size    equ     800" >> basic_warrior.red
+	@echo "step    equ     23" >> basic_warrior.red
+	@echo "live    equ     3039" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
 	@echo "scan    add     #step, ptr" >> basic_warrior.red
 	@echo "        jmz     scan, @ptr" >> basic_warrior.red
-	@echo "        mov     sbomb, @ptr" >> basic_warrior.red
-	@echo "        mov     sbomb, <ptr" >> basic_warrior.red
+	@echo "        mov     bomb, @ptr" >> basic_warrior.red
+	@echo "        mov     bomb, <ptr" >> basic_warrior.red
 	@echo "        djn     scan, count" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "clear   mov     dbomb, <cptr" >> basic_warrior.red
+	@echo "clear   mov     bomb, <cptr" >> basic_warrior.red
 	@echo "        djn     clear, ccount" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
 	@echo "ptr     dat     #0" >> basic_warrior.red
-	@echo "sbomb   spl     0" >> basic_warrior.red
-	@echo "dbomb   dat     #0, #0" >> basic_warrior.red
-	@echo "count   dat     #size" >> basic_warrior.red
-	@echo "cptr    dat     #size" >> basic_warrior.red
-	@echo "ccount  dat     #size" >> basic_warrior.red
+	@echo "bomb    spl     live" >> basic_warrior.red
+	@echo "count   dat     #80" >> basic_warrior.red
+	@echo "cptr    dat     #800" >> basic_warrior.red
+	@echo "ccount  dat     #800" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
 	@echo "        end     scan" >> basic_warrior.red
+
 
 
 
