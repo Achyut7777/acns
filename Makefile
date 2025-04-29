@@ -23,22 +23,27 @@ clean:
 # Create the basic warrior
 basic_warrior.red:
 	@echo ";redcode-94" > basic_warrior.red
-	@echo ";name     StoneBomber" >> basic_warrior.red
+	@echo ";name     AggressiveBomber" >> basic_warrior.red
 	@echo ";author   YourName" >> basic_warrior.red
-	@echo ";strategy SPL/DAT stone bomber with prime step" >> basic_warrior.red
+	@echo ";strategy Rapid multi-pointer DAT bombing with prime steps" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "        org     stone" >> basic_warrior.red
+	@echo "        org     start" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "stone   spl     0,    <-step" >> basic_warrior.red
-	@echo "        dat     #0,   #0" >> basic_warrior.red
-	@echo "        mov     stone, @ptr" >> basic_warrior.red
-	@echo "        add     #23,  ptr" >> basic_warrior.red
-	@echo "        jmp     stone" >> basic_warrior.red
+	@echo "start   mov     bomb, @ptr1" >> basic_warrior.red
+	@echo "        mov     bomb, @ptr2" >> basic_warrior.red
+	@echo "        mov     bomb, @ptr3" >> basic_warrior.red
+	@echo "        add     #7, ptr1" >> basic_warrior.red
+	@echo "        add     #11, ptr2" >> basic_warrior.red
+	@echo "        add     #13, ptr3" >> basic_warrior.red
+	@echo "        jmp     start" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "ptr     dat     #0" >> basic_warrior.red
-	@echo "step    dat     #23" >> basic_warrior.red
+	@echo "ptr1    dat     #0" >> basic_warrior.red
+	@echo "ptr2    dat     #100" >> basic_warrior.red
+	@echo "ptr3    dat     #200" >> basic_warrior.red
+	@echo "bomb    dat     #0, #0" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "        end     stone" >> basic_warrior.red
+	@echo "        end     start" >> basic_warrior.red
+
 
 
 
