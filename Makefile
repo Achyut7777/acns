@@ -24,7 +24,7 @@ clean:
 basic_warrior.red:
 	@echo ";redcode-94" > basic_warrior.red
 	@echo ";name     basic_warrior" >> basic_warrior.red
-	@echo ";author   Perplexity" >> basic_warrior.red
+	@echo ";author   Achyut" >> basic_warrior.red
 	@echo ";strategy Stone-imp hybrid: fast DAT bombing, trailing imps, and a 3-way imp spiral" >> basic_warrior.red
 	@echo ";assert   1" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
