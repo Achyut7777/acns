@@ -23,30 +23,25 @@ clean:
 # Create the basic warrior
 basic_warrior.red:
 	@echo ";redcode-94" > basic_warrior.red
-	@echo ";name     Cleaver" >> basic_warrior.red
-	@echo ";author   Stefan Strack" >> basic_warrior.red
-	@echo ";strategy Scanner/stone hybrid" >> basic_warrior.red
+	@echo ";name     SilkJMP" >> basic_warrior.red
+	@echo ";author   Perplexity AI" >> basic_warrior.red
+	@echo ";strategy Fast Silk-style paper with JMP bombs (anti-paper)" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "        org     scan" >> basic_warrior.red
+	@echo "        org     silk" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "step    equ     23" >> basic_warrior.red
-	@echo "size    equ     800" >> basic_warrior.red
+	@echo "step    equ     97" >> basic_warrior.red
+	@echo "jmpstep equ     251" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "scan    add     #step, ptr" >> basic_warrior.red
-	@echo "        jmz     scan, @ptr" >> basic_warrior.red
-	@echo "        mov     bomb, @ptr" >> basic_warrior.red
-	@echo "        djn     scan, count" >> basic_warrior.red
+	@echo "silk    spl     1, <step" >> basic_warrior.red
+	@echo "        mov.i   >-1, }-1" >> basic_warrior.red
+	@echo "        mov     jbomb, >jmpstep" >> basic_warrior.red
+	@echo "        jmp     silk" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "clear   mov     bomb, <cptr" >> basic_warrior.red
-	@echo "        djn     clear, ccount" >> basic_warrior.red
+	@echo "jbomb   jmp     0, 0" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "ptr     dat     #0" >> basic_warrior.red
-	@echo "bomb    dat     #0, #0" >> basic_warrior.red
-	@echo "count   dat     #size" >> basic_warrior.red
-	@echo "cptr    dat     #size" >> basic_warrior.red
-	@echo "ccount  dat     #size" >> basic_warrior.red
-	@echo "" >> basic_warrior.red
-	@echo "        end     scan" >> basic_warrior.red
+	@echo ";assert 1" >> basic_warrior.red
+	@echo "        end     silk" >> basic_warrior.red
+
 
 
 
