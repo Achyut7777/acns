@@ -21,26 +21,27 @@ clean:
 	rm -f chooseyourfighter.red in.bin basic_warrior.red advanced_warrior.red
 
 # Create the basic warrior
-simplescanner.red:
-	@echo ";redcode-94" > simplescanner.red
-	@echo ";name     SimpleScanner" >> simplescanner.red
-	@echo ";author   Perplexity" >> simplescanner.red
-	@echo ";strategy Simple B-scanner: scans, stuns with SPL 0, kills with DAT" >> simplescanner.red
-	@echo ";assert 1" >> simplescanner.red
-	@echo "" >> simplescanner.red
-	@echo "step    equ 10" >> simplescanner.red
-	@echo "" >> simplescanner.red
-	@echo "        org     start" >> simplescanner.red
-	@echo "" >> simplescanner.red
-	@echo "start   add     #step, scanptr      ; Move scan pointer forward" >> simplescanner.red
-	@echo "scanptr jmz.f   start, 5            ; If location is empty, keep scanning" >> simplescanner.red
-	@echo "        spl     0                   ; Stun opponent process" >> simplescanner.red
-	@echo "        mov     datbomb, @scanptr   ; Drop DAT bomb at found location" >> simplescanner.red
-	@echo "        jmp     start               ; Continue scanning" >> simplescanner.red
-	@echo "" >> simplescanner.red
-	@echo "datbomb dat     #0, #0" >> simplescanner.red
-	@echo "" >> simplescanner.red
-	@echo "        end     start" >> simplescanner.red
+basic_warrior.red:
+	@echo ";redcode-94" > basic_warrior.red
+	@echo ";name     basic_warrior" >> basic_warrior.red
+	@echo ";author   Perplexity" >> basic_warrior.red
+	@echo ";strategy Simple B-scanner: scans, stuns with SPL 0, kills with DAT" >> basic_warrior.red
+	@echo ";assert 1" >> basic_warrior.red
+	@echo "" >> basic_warrior.red
+	@echo "step    equ 10" >> basic_warrior.red
+	@echo "" >> basic_warrior.red
+	@echo "        org     start" >> basic_warrior.red
+	@echo "" >> basic_warrior.red
+	@echo "start   add     #step, scanptr      ; Move scan pointer forward" >> basic_warrior.red
+	@echo "scanptr jmz.f   start, 5            ; If location is empty, keep scanning" >> basic_warrior.red
+	@echo "        spl     0                   ; Stun opponent process" >> basic_warrior.red
+	@echo "        mov     datbomb, @scanptr   ; Drop DAT bomb at found location" >> basic_warrior.red
+	@echo "        jmp     start               ; Continue scanning" >> basic_warrior.red
+	@echo "" >> basic_warrior.red
+	@echo "datbomb dat     #0, #0" >> basic_warrior.red
+	@echo "" >> basic_warrior.red
+	@echo "        end     start" >> basic_warrior.red
+
 
 
 
