@@ -22,25 +22,23 @@ clean:
 
 # Create the basic warrior
 basic_warrior.red:
-	@echo ";redcode-94" > basic_warrior.red
-	@echo ";name     SilkJMP" >> basic_warrior.red
-	@echo ";author   Perplexity AI" >> basic_warrior.red
-	@echo ";strategy Fast Silk-style paper with JMP bombs (anti-paper)" >> basic_warrior.red
+	@echo ";redcode" > basic_warrior.red
+	@echo ";name Default Maelstrom" >> basic_warrior.red
+	@echo ";author achyut" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "        org     silk" >> basic_warrior.red
-	@echo "" >> basic_warrior.red
-	@echo "step    equ     97" >> basic_warrior.red
-	@echo "jmpstep equ     251" >> basic_warrior.red
-	@echo "" >> basic_warrior.red
-	@echo "silk    spl     1, <step" >> basic_warrior.red
-	@echo "        mov.i   >-1, }-1" >> basic_warrior.red
-	@echo "        mov     jbomb, >jmpstep" >> basic_warrior.red
-	@echo "        jmp     silk" >> basic_warrior.red
-	@echo "" >> basic_warrior.red
-	@echo "jbomb   jmp     0, 0" >> basic_warrior.red
-	@echo "" >> basic_warrior.red
-	@echo ";assert 1" >> basic_warrior.red
-	@echo "        end     silk" >> basic_warrior.red
+	@echo "start   SPL 1" >> basic_warrior.red
+	@echo "        SPL 2" >> basic_warrior.red
+	@echo "        SPL 3" >> basic_warrior.red
+	@echo "        SPL 4" >> basic_warrior.red
+	@echo "        MOV 2, @2" >> basic_warrior.red
+	@echo "        SPL 2" >> basic_warrior.red
+	@echo "        MOV 2, @2" >> basic_warrior.red
+	@echo "        SPL 3" >> basic_warrior.red
+	@echo "        MOV 2, @2" >> basic_warrior.red
+	@echo "        JMP start" >> basic_warrior.red
+	@echo "        DAT #0, #0" >> basic_warrior.red
+	@echo "end start" >> basic_warrior.red
+
 
 
 
