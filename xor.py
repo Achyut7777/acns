@@ -1,28 +1,26 @@
-import random
-import sys
+#!/usr/bin/env python3
+import os
 
-key = [0] * 1178
+def xor_transform(input_file="in.bin", key=42):
+    """
+    Read binary data from input_file and XOR each byte with the key.
+    This can be used to transform or obfuscate data.
+    """
+    if not os.path.exists(input_file):
+        print(f"Error: {input_file} not found!")
+        return None
+    
+    with open(input_file, 'rb') as f:
+        data = f.read()
+    
+    # XOR each byte with the key
+    transformed_data = bytearray(b ^ key for b in data)
+    
+    # You can use the transformed data to modify your warrior
+    # For demonstration, we'll just print the first few bytes
+    print(f"XOR transformed first 10 bytes: {transformed_data[:10]}")
+    
+    return transformed_data
 
-random.seed(42)
-with open(sys.argv[1], "rb") as infile:
-    while True:
-        c = sys.stdin.read(1)
-        if c:
-            for i in range(ord(c)):
-                numj = random.randint(4,250)
-                for j in range(numj):
-                    key[random.randint(0, 1177)] = random.randint(1,250)
-        else:
-            break
-    outfile = open(sys.argv[2], "ab")
-    count = 0
-    while True:
-        byte = infile.read(1)
-        if byte:
-            outbyte = (int.from_bytes(byte) ^ key[count % 1178] & 0x7f).to_bytes(1)
-            outfile.write(outbyte)
-            count += 1
-        else:
-            break
-#print(key)
-
+if __name__ == "__main__":
+    xor_transform()
