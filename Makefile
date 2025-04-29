@@ -23,24 +23,33 @@ clean:
 # Create the basic warrior
 basic_warrior.red:
 	@echo ";redcode-94" > basic_warrior.red
-	@echo ";name     SilkSPL" >> basic_warrior.red
+	@echo ";name     PaperCutter" >> basic_warrior.red
 	@echo ";author   Perplexity AI" >> basic_warrior.red
-	@echo ";strategy Fast Silk-style replicator with SPL bombs to stun enemy" >> basic_warrior.red
+	@echo ";strategy Scanner with SPL bombs, then core-clear (beats replicators)" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "        org     silk" >> basic_warrior.red
+	@echo "        org     scan" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "step    equ     97" >> basic_warrior.red
-	@echo "splstep equ     251" >> basic_warrior.red
+	@echo "step    equ     13" >> basic_warrior.red
+	@echo "size    equ     800" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "silk    spl     1, <step" >> basic_warrior.red
-	@echo "        mov.i   >-1, }-1" >> basic_warrior.red
-	@echo "        mov     sbomb, >splstep" >> basic_warrior.red
-	@echo "        jmp     silk" >> basic_warrior.red
+	@echo "scan    add     #step, ptr" >> basic_warrior.red
+	@echo "        jmz     scan, @ptr" >> basic_warrior.red
+	@echo "        mov     sbomb, @ptr" >> basic_warrior.red
+	@echo "        mov     sbomb, <ptr" >> basic_warrior.red
+	@echo "        djn     scan, count" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
+	@echo "clear   mov     dbomb, <cptr" >> basic_warrior.red
+	@echo "        djn     clear, ccount" >> basic_warrior.red
+	@echo "" >> basic_warrior.red
+	@echo "ptr     dat     #0" >> basic_warrior.red
 	@echo "sbomb   spl     0" >> basic_warrior.red
+	@echo "dbomb   dat     #0, #0" >> basic_warrior.red
+	@echo "count   dat     #size" >> basic_warrior.red
+	@echo "cptr    dat     #size" >> basic_warrior.red
+	@echo "ccount  dat     #size" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo ";assert 1" >> basic_warrior.red
-	@echo "        end     silk" >> basic_warrior.red
+	@echo "        end     scan" >> basic_warrior.red
+
 
 
 
