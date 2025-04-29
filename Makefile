@@ -1,7 +1,7 @@
 # Makefile for CSE548 Warrior Assignment
 
 # Get your environment variable
-ENV_VAR=$(shell echo $$CSE548_WARRIOR_KEY)
+ENV_VAR=$(shell echo $$GHTEQJWKW)
 
 all: chooseyourfighter.red
 
