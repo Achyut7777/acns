@@ -23,30 +23,26 @@ clean:
 # Create the basic warrior
 basic_warrior.red:
 	@echo ";redcode-94" > basic_warrior.red
-	@echo ";name     HybridScannerBomber" >> basic_warrior.red
+	@echo ";name     PureBomberClear" >> basic_warrior.red
 	@echo ";author   YourName" >> basic_warrior.red
-	@echo ";strategy Scans for enemy, bombs when found, then fast core bombing" >> basic_warrior.red
+	@echo ";strategy Fast bomber with core-clear endgame" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "        org     scan" >> basic_warrior.red
+	@echo "        org     start" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "scan    add     #13, ptr         ; step through core (prime number for coverage)" >> basic_warrior.red
-	@echo "        jmz     scan, @ptr       ; if @ptr is zero, keep scanning" >> basic_warrior.red
-	@echo "        mov     sbomb, @ptr      ; SPL bomb to stun replicators" >> basic_warrior.red
-	@echo "        mov     dbomb, @ptr      ; DAT bomb to kill" >> basic_warrior.red
-	@echo "        djn     scan, scan_count ; repeat scan_count times" >> basic_warrior.red
+	@echo "start   mov     bomb, @ptr" >> basic_warrior.red
+	@echo "        add     #13, ptr" >> basic_warrior.red
+	@echo "        djn     start, count" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "bomber  mov     dbomb, @bptr     ; fast DAT bombing" >> basic_warrior.red
-	@echo "        add     #7, bptr         ; another prime step for coverage" >> basic_warrior.red
-	@echo "        djn     bomber, bomb_count" >> basic_warrior.red
+	@echo "clear   mov     bomb, <cptr" >> basic_warrior.red
+	@echo "        djn     clear, ccount" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "ptr         dat     #0" >> basic_warrior.red
-	@echo "bptr        dat     #500" >> basic_warrior.red
-	@echo "sbomb       spl     0" >> basic_warrior.red
-	@echo "dbomb       dat     0, 0" >> basic_warrior.red
-	@echo "scan_count  dat     #50" >> basic_warrior.red
-	@echo "bomb_count  dat     #100" >> basic_warrior.red
+	@echo "ptr     dat     #0" >> basic_warrior.red
+	@echo "count   dat     #400" >> basic_warrior.red
+	@echo "cptr    dat     #800" >> basic_warrior.red
+	@echo "ccount  dat     #800" >> basic_warrior.red
+	@echo "bomb    dat     #0, #0" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "        end     scan" >> basic_warrior.red
+	@echo "        end     start" >> basic_warrior.red
 
 
 # Create the advanced warrior
