@@ -23,31 +23,50 @@ clean:
 # Create the basic warrior
 basic_warrior.red:
 	@echo ";redcode-94" > basic_warrior.red
-	@echo ";name     SimpleVampire" >> basic_warrior.red
+	@echo ";name     AggressiveReplicatorBomber" >> basic_warrior.red
 	@echo ";author   YourName" >> basic_warrior.red
-	@echo ";strategy Bombs JMPs to a pit, then clears core" >> basic_warrior.red
+	@echo ";strategy Multi-replication and multi-pointer aggressive DAT bombing" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "        org     vampire" >> basic_warrior.red
+	@echo "        org     start" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "vampire mov     vampjmp, @bptr" >> basic_warrior.red
-	@echo "        add     #23, bptr" >> basic_warrior.red
-	@echo "        djn     vampire, vampcnt" >> basic_warrior.red
-	@echo "        jmp     clear" >> basic_warrior.red
+	@echo "start   spl     copy1" >> basic_warrior.red
+	@echo "        spl     copy2" >> basic_warrior.red
+	@echo "        spl     copy3" >> basic_warrior.red
+	@echo "        jmp     bomber" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "clear   mov     killer, <cptr" >> basic_warrior.red
-	@echo "        djn     clear, ccnt" >> basic_warrior.red
+	@echo "copy1   mov     @start, ptr1" >> basic_warrior.red
+	@echo "        add     #7, ptr1" >> basic_warrior.red
+	@echo "        djn     copy1, rcount1" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "vampjmp jmp     pit" >> basic_warrior.red
-	@echo "bptr    dat     #0" >> basic_warrior.red
-	@echo "vampcnt dat     #100" >> basic_warrior.red
-	@echo "cptr    dat     #800" >> basic_warrior.red
-	@echo "ccnt    dat     #800" >> basic_warrior.red
-	@echo "killer  dat     #0, #0" >> basic_warrior.red
+	@echo "copy2   mov     @start, ptr2" >> basic_warrior.red
+	@echo "        add     #11, ptr2" >> basic_warrior.red
+	@echo "        djn     copy2, rcount2" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "pit     spl     pit" >> basic_warrior.red
-	@echo "        dat     #0, #0" >> basic_warrior.red
+	@echo "copy3   mov     @start, ptr3" >> basic_warrior.red
+	@echo "        add     #13, ptr3" >> basic_warrior.red
+	@echo "        djn     copy3, rcount3" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "        end     vampire" >> basic_warrior.red
+	@echo "bomber  mov     bomb, @bptr1" >> basic_warrior.red
+	@echo "        mov     bomb, @bptr2" >> basic_warrior.red
+	@echo "        mov     bomb, @bptr3" >> basic_warrior.red
+	@echo "        add     #17, bptr1" >> basic_warrior.red
+	@echo "        add     #19, bptr2" >> basic_warrior.red
+	@echo "        add     #23, bptr3" >> basic_warrior.red
+	@echo "        jmp     bomber" >> basic_warrior.red
+	@echo "" >> basic_warrior.red
+	@echo "ptr1    dat     #0" >> basic_warrior.red
+	@echo "ptr2    dat     #100" >> basic_warrior.red
+	@echo "ptr3    dat     #200" >> basic_warrior.red
+	@echo "rcount1 dat     #10" >> basic_warrior.red
+	@echo "rcount2 dat     #10" >> basic_warrior.red
+	@echo "rcount3 dat     #10" >> basic_warrior.red
+	@echo "bptr1   dat     #300" >> basic_warrior.red
+	@echo "bptr2   dat     #400" >> basic_warrior.red
+	@echo "bptr3   dat     #500" >> basic_warrior.red
+	@echo "bomb    dat     #0, #0" >> basic_warrior.red
+	@echo "" >> basic_warrior.red
+	@echo ";assert 1" >> basic_warrior.red
+	@echo "        end     start" >> basic_warrior.red
 
 
 
