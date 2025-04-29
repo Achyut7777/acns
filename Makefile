@@ -23,24 +23,25 @@ clean:
 # Create the basic warrior
 basic_warrior.red:
 	@echo ";redcode-94" > basic_warrior.red
-	@echo ";name     Level3-Improved" >> basic_warrior.red
-	@echo ";author   CSE548 (modified by Perplexity AI)" >> basic_warrior.red
-	@echo ";strategy Fast Silk-style replicator, aggressive split, occasional bombing" >> basic_warrior.red
+	@echo ";name     SilkSPL" >> basic_warrior.red
+	@echo ";author   Perplexity AI" >> basic_warrior.red
+	@echo ";strategy Fast Silk-style replicator with SPL bombs to stun enemy" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "        org     start" >> basic_warrior.red
+	@echo "        org     silk" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
 	@echo "step    equ     97" >> basic_warrior.red
-	@echo "bombstep equ    251" >> basic_warrior.red
+	@echo "splstep equ     251" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "start   spl     1, <step" >> basic_warrior.red
+	@echo "silk    spl     1, <step" >> basic_warrior.red
 	@echo "        mov.i   >-1, }-1" >> basic_warrior.red
-	@echo "        mov.i   bomb, >bombstep" >> basic_warrior.red
-	@echo "        jmp     start" >> basic_warrior.red
+	@echo "        mov     sbomb, >splstep" >> basic_warrior.red
+	@echo "        jmp     silk" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "bomb    dat     #0, #0" >> basic_warrior.red
+	@echo "sbomb   spl     0" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
 	@echo ";assert 1" >> basic_warrior.red
-	@echo "        end     start" >> basic_warrior.red
+	@echo "        end     silk" >> basic_warrior.red
+
 
 
 
