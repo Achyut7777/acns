@@ -25,23 +25,36 @@ basic_warrior.red:
 	@echo ";redcode-94" > basic_warrior.red
 	@echo ";name     basic_warrior" >> basic_warrior.red
 	@echo ";author   Perplexity" >> basic_warrior.red
-	@echo ";strategy Simple B-scanner: scans, stuns with SPL 0, kills with DAT" >> basic_warrior.red
-	@echo ";assert 1" >> basic_warrior.red
+	@echo ";strategy Stone-imp hybrid: fast DAT bombing, trailing imps, and a 3-way imp spiral" >> basic_warrior.red
+	@echo ";assert   1" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "step    equ 10" >> basic_warrior.red
+	@echo "STRIDE   equ 2687      ; Stone bomber stride (co-prime to 8000)" >> basic_warrior.red
+	@echo "IMP_GAP  equ 2667      ; Gap for imp spiral (co-prime to 8000)" >> basic_warrior.red
+	@echo "IMP      equ 2667      ; Imp instruction offset" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "        org     start" >> basic_warrior.red
+	@echo "        org bomber" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "start   add     #step, scanptr      ; Move scan pointer forward" >> basic_warrior.red
-	@echo "scanptr jmz.f   start, 5            ; If location is empty, keep scanning" >> basic_warrior.red
-	@echo "        spl     0                   ; Stun opponent process" >> basic_warrior.red
-	@echo "        mov     datbomb, @scanptr   ; Drop DAT bomb at found location" >> basic_warrior.red
-	@echo "        jmp     start               ; Continue scanning" >> basic_warrior.red
+	@echo "; --- Stone Bomber with trailing imps ---" >> basic_warrior.red
+	@echo "bomber  mov.i  #0,   STRIDE          ; Drop DAT bomb (0/70) at stride" >> basic_warrior.red
+	@echo "        mov.i  imp,  <bptr           ; Leave imp behind (self-trailing)" >> basic_warrior.red
+	@echo "        add    #STRIDE, bptr         ; Advance bombing pointer" >> basic_warrior.red
+	@echo "        jmp    bomber                ; Repeat" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "datbomb dat     #0, #0" >> basic_warrior.red
+	@echo "bptr    dat    #0, 0                 ; Bomber pointer" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "        end     start" >> basic_warrior.red
-
+	@echo "imp     mov.i  0,   1                ; Imp instruction" >> basic_warrior.red
+	@echo "" >> basic_warrior.red
+	@echo "; --- Imp Spiral Launcher ---" >> basic_warrior.red
+	@echo "launcher spl    imp1                 ; Launch first imp" >> basic_warrior.red
+	@echo "         spl    imp2                 ; Launch second imp" >> basic_warrior.red
+	@echo "         spl    imp3                 ; Launch third imp" >> basic_warrior.red
+	@echo "         jmp    bomber               ; Start bombing" >> basic_warrior.red
+	@echo "" >> basic_warrior.red
+	@echo "imp1     mov.i  0,   IMP_GAP         ; First imp" >> basic_warrior.red
+	@echo "imp2     mov.i  0,   IMP_GAP         ; Second imp" >> basic_warrior.red
+	@echo "imp3     mov.i  0,   IMP_GAP         ; Third imp" >> basic_warrior.red
+	@echo "" >> basic_warrior.red
+	@echo "        end launcher" >> basic_warrior.red
 
 
 
