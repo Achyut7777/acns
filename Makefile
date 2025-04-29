@@ -23,29 +23,22 @@ clean:
 # Create the basic warrior
 basic_warrior.red:
 	@echo ";redcode-94" > basic_warrior.red
-	@echo ";name     ScanClear" >> basic_warrior.red
-	@echo ";author   YourName" >> basic_warrior.red
-	@echo ";strategy Aggressive scanner with SPL/DAT bombs, then core-clear" >> basic_warrior.red
+	@echo ";name     SimpleCoreClear" >> basic_warrior.red
+	@echo ";author   Perplexity AI" >> basic_warrior.red
+	@echo ";strategy Fast core-clear, wipes memory in large steps" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "        org     scan" >> basic_warrior.red
+	@echo "        org     start" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "scan    add     #7, ptr" >> basic_warrior.red
-	@echo "        jmz     scan, @ptr" >> basic_warrior.red
-	@echo "        mov     sbomb, @ptr" >> basic_warrior.red
-	@echo "        mov     dbomb, @ptr" >> basic_warrior.red
-	@echo "        djn     scan, scount" >> basic_warrior.red
+	@echo "step    equ     50" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "clear   mov     dbomb, <cptr" >> basic_warrior.red
-	@echo "        djn     clear, ccount" >> basic_warrior.red
+	@echo "start   mov     bomb, ptr" >> basic_warrior.red
+	@echo "        add     #step, ptr" >> basic_warrior.red
+	@echo "        jmp     start" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "ptr     dat     #0" >> basic_warrior.red
-	@echo "sbomb   spl     0" >> basic_warrior.red
-	@echo "dbomb   dat     0, 0" >> basic_warrior.red
-	@echo "scount  dat     #80" >> basic_warrior.red
-	@echo "cptr    dat     #800" >> basic_warrior.red
-	@echo "ccount  dat     #800" >> basic_warrior.red
+	@echo "ptr     dat     0" >> basic_warrior.red
+	@echo "bomb    dat     #0, #0" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "        end     scan" >> basic_warrior.red
+	@echo "        end     start" >> basic_warrior.red
 
 
 
