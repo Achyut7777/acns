@@ -23,27 +23,31 @@ clean:
 # Create the basic warrior
 basic_warrior.red:
 	@echo ";redcode-94" > basic_warrior.red
-	@echo ";name     BasicFighter" >> basic_warrior.red
+	@echo ";name     HybridScannerBomber" >> basic_warrior.red
 	@echo ";author   YourName" >> basic_warrior.red
-	@echo ";strategy Simple replicator with bombing" >> basic_warrior.red
+	@echo ";strategy Scans for enemy, bombs when found, then fast core bombing" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "        org     start" >> basic_warrior.red
+	@echo "        org     scan" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "start   spl     0             ; spawn a new process" >> basic_warrior.red
-	@echo "        mov     @start, ptr   ; replicate code to ptr" >> basic_warrior.red
-	@echo "        add     #7, ptr       ; advance replication pointer" >> basic_warrior.red
+	@echo "scan    add     #13, ptr         ; step through core (prime number for coverage)" >> basic_warrior.red
+	@echo "        jmz     scan, @ptr       ; if @ptr is zero, keep scanning" >> basic_warrior.red
+	@echo "        mov     sbomb, @ptr      ; SPL bomb to stun replicators" >> basic_warrior.red
+	@echo "        mov     dbomb, @ptr      ; DAT bomb to kill" >> basic_warrior.red
+	@echo "        djn     scan, scan_count ; repeat scan_count times" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "        mov     bomb, @bptr   ; drop a bomb" >> basic_warrior.red
-	@echo "        add     #13, bptr     ; advance bombing pointer" >> basic_warrior.red
+	@echo "bomber  mov     dbomb, @bptr     ; fast DAT bombing" >> basic_warrior.red
+	@echo "        add     #7, bptr         ; another prime step for coverage" >> basic_warrior.red
+	@echo "        djn     bomber, bomb_count" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "        jmp     start         ; loop forever" >> basic_warrior.red
+	@echo "ptr         dat     #0" >> basic_warrior.red
+	@echo "bptr        dat     #500" >> basic_warrior.red
+	@echo "sbomb       spl     0" >> basic_warrior.red
+	@echo "dbomb       dat     0, 0" >> basic_warrior.red
+	@echo "scan_count  dat     #50" >> basic_warrior.red
+	@echo "bomb_count  dat     #100" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "ptr      dat    #0           ; replication pointer" >> basic_warrior.red
-	@echo "bptr     dat    #100         ; bombing pointer" >> basic_warrior.red
-	@echo "bomb     dat    #0, #0       ; DAT bomb" >> basic_warrior.red
-	@echo "" >> basic_warrior.red
-	@echo ";assert 1" >> basic_warrior.red
-	@echo "        end     start" >> basic_warrior.red
+	@echo "        end     scan" >> basic_warrior.red
+
 
 # Create the advanced warrior
 advanced_warrior.red:
