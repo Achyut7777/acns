@@ -23,26 +23,23 @@ clean:
 # Create the basic warrior
 basic_warrior.red:
 	@echo ";redcode-94" > basic_warrior.red
-	@echo ";name     PureBomberClear" >> basic_warrior.red
+	@echo ";name     StoneBomber" >> basic_warrior.red
 	@echo ";author   YourName" >> basic_warrior.red
-	@echo ";strategy Fast bomber with core-clear endgame" >> basic_warrior.red
+	@echo ";strategy SPL/DAT stone bomber with prime step" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "        org     start" >> basic_warrior.red
+	@echo "        org     stone" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "start   mov     bomb, @ptr" >> basic_warrior.red
-	@echo "        add     #13, ptr" >> basic_warrior.red
-	@echo "        djn     start, count" >> basic_warrior.red
-	@echo "" >> basic_warrior.red
-	@echo "clear   mov     bomb, <cptr" >> basic_warrior.red
-	@echo "        djn     clear, ccount" >> basic_warrior.red
+	@echo "stone   spl     0,    <-step" >> basic_warrior.red
+	@echo "        dat     #0,   #0" >> basic_warrior.red
+	@echo "        mov     stone, @ptr" >> basic_warrior.red
+	@echo "        add     #23,  ptr" >> basic_warrior.red
+	@echo "        jmp     stone" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
 	@echo "ptr     dat     #0" >> basic_warrior.red
-	@echo "count   dat     #400" >> basic_warrior.red
-	@echo "cptr    dat     #800" >> basic_warrior.red
-	@echo "ccount  dat     #800" >> basic_warrior.red
-	@echo "bomb    dat     #0, #0" >> basic_warrior.red
+	@echo "step    dat     #23" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "        end     start" >> basic_warrior.red
+	@echo "        end     stone" >> basic_warrior.red
+
 
 
 # Create the advanced warrior
