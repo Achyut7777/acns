@@ -4,11 +4,11 @@ import shutil
 import os
 
 # --- Configuration ---
-ENV_VAR_NAME = "UIYUKYRGG"
-TGZ_FILENAME = "srivastavaanshuman.tgz"
+ENV_VAR_NAME = "GHTEQJWKW"
+TGZ_FILENAME = "sontiachyutaram.tgz"
 FINAL_DESTINATION = "tarballs"
-BASIC_RED = "basic.red"
-ADVANCED_RED = "advanced.red"
+BASIC_RED = "basic_warrior.red"
+ADVANCED_RED = "advanced_warrior.red"
 
 # --- Helper function to run shell commands ---
 def run(cmd, sleep_time=1, env=None, allow_failure=False):
