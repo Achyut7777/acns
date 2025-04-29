@@ -23,32 +23,26 @@ clean:
 # Create the basic warrior
 basic_warrior.red:
 	@echo ";redcode-94" > basic_warrior.red
-	@echo ";name     OneShotScanner" >> basic_warrior.red
+	@echo ";name     SPLScanner" >> basic_warrior.red
 	@echo ";author   Perplexity AI" >> basic_warrior.red
-	@echo ";strategy Scans for enemy, then core-clears (good vs replicators)" >> basic_warrior.red
+	@echo ";strategy SPL-bombing scanner (scissors), effective vs replicators" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
 	@echo "        org     scan" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "step    equ     23" >> basic_warrior.red
+	@echo "step    equ     17" >> basic_warrior.red
 	@echo "size    equ     800" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
 	@echo "scan    add     #step, ptr" >> basic_warrior.red
 	@echo "        jmz     scan, @ptr" >> basic_warrior.red
-	@echo "        mov     bomb, @ptr" >> basic_warrior.red
-	@echo "        mov     bomb, <ptr" >> basic_warrior.red
+	@echo "        mov     sbomb, @ptr" >> basic_warrior.red
 	@echo "        djn     scan, count" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
-	@echo "; Core-clear phase" >> basic_warrior.red
-	@echo "clear   mov     bomb, <cptr" >> basic_warrior.red
-	@echo "        djn     clear, ccount" >> basic_warrior.red
-	@echo "" >> basic_warrior.red
 	@echo "ptr     dat     #0" >> basic_warrior.red
-	@echo "bomb    dat     #0, #0" >> basic_warrior.red
+	@echo "sbomb   spl     0" >> basic_warrior.red
 	@echo "count   dat     #size" >> basic_warrior.red
-	@echo "cptr    dat     #size" >> basic_warrior.red
-	@echo "ccount  dat     #size" >> basic_warrior.red
 	@echo "" >> basic_warrior.red
 	@echo "        end     scan" >> basic_warrior.red
+
 
 
 
